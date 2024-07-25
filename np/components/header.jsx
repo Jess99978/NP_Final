@@ -353,14 +353,15 @@ const HeaderComponent = () => {
     { id: 6, name: "烘焙/點心", href: "#", className: styles.selectionLink },
   ];
   // -----------------header 捲動效果 -------------------------------
+  // 當頁面向下捲動，且一次捲動超過 300 px 時，shrink 值為 true，header 縮起
   const [shrink, setShrink] = useState(false);
+  // 用 useRef 來儲存上一次的捲動位置
   const lastScrollY = useRef(0);
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const threshold = 300; //設定閾值避免偵測捲動太敏感導致閃爍問題
-      // console.log("currentScrollY", currentScrollY);
-      // console.log("lastScrollY", lastScrollY.current);
+      //設定閾值避免偵測捲動太敏感導致閃爍問題
+      const threshold = 300;
       if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
         if (currentScrollY > lastScrollY.current) {
           setShrink(true);
