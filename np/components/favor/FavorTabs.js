@@ -3,7 +3,6 @@ import styles from "./FavorTabs.module.scss";
 import { useFavor } from "@/hooks/use-favorData";
 
 function FavorTabs({ activeTab, setActiveTab, filteredRecipeData,filteredClassData,filteredProductData }) {
-  // 處理點擊事件
   function handleTabClick(tab) {
     setActiveTab(tab);
   }
@@ -12,21 +11,16 @@ function FavorTabs({ activeTab, setActiveTab, filteredRecipeData,filteredClassDa
   const [FavorCountC, setFavorCountC] = useState(favorClass.length)
   const [FavorCountP, setFavorCountP] = useState(favorProduct.length)
   useEffect(()=>{
-    if (filteredRecipeData && filteredRecipeData.length > 0) {
-    setFavorCountR(filteredRecipeData.length)
-    } else {
-      setFavorCountR(0)
+    if (filteredRecipeData) {
+      setFavorCountR(filteredRecipeData.length)
     }
-    if (filteredClassData && filteredClassData.length > 0) {
-      setFavorCountC(filteredClassData.length)
-      } else {
-        setFavorCountC(0)
+    if (filteredProductData) {
+      setFavorCountP(filteredProductData.length);
     }
-    if (filteredProductData && filteredProductData.length > 0) {
-      setFavorCountP(filteredProductData.length)
-      } else {
-        setFavorCountP(0)
-    }}, [filteredRecipeData,filteredClassData,filteredProductData])
+    if (filteredClassData) {
+      setFavorCountC(filteredClassData.length);
+    }
+  }, [filteredRecipeData, filteredClassData, filteredProductData])
   return (
     <div className={styles.tabs}>
       <div

@@ -12,10 +12,8 @@ import ProductCardList from "@/components/product/ProductCardList";
 import RecipeCardsList from "@/components/recipe/list/RecipeCardsList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { useAuth } from "@/contexts/AuthContext";
 import { useFavor } from "@/hooks/use-favorData";
 export default function Favor() {
-  const { auth } = useAuth();
   const { recipeData, classData, productData } = useFavor();
   const [activeTab, setActiveTab] = useState("食譜");
 
@@ -25,39 +23,39 @@ export default function Favor() {
   const [filteredClassData, setFilteredClassData] = useState([]);
   const [filteredProductData, setFilteredProductData] = useState([]);
   // 排序
-  const [sortAsc, setSortAsc] = useState(false);
+  const [sortDesc, setSortDesc] = useState(false);
+  const sortData = function (data, direction) {
+    data.sort((a, b) => {
+      if (direction === "asc") {
+        return new Date(a.created_at) - new Date(b.created_at);
+      } else if (direction === "desc") {
+        return new Date(b.created_at) - new Date(a.created_at);
+      }
+    });
+  };
   const sortByTime = () => {
-    if (sortAsc) {
-      recipeData.sort(
-        (a, b) => new Date(a.created_at) - new Date(b.created_at)
-      );
-      classData.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-      productData.sort(
-        (a, b) => new Date(a.created_at) - new Date(b.created_at)
-      );
+    if (sortDesc) {
+      sortData(recipeData,"asc");
+      sortData(classData,"asc");
+      sortData(productData,"asc");
     } else {
-      recipeData.sort(
-        (a, b) => new Date(b.created_at) - new Date(a.created_at)
-      );
-      classData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-      productData.sort(
-        (a, b) => new Date(b.created_at) - new Date(a.created_at)
-      );
+    sortData(recipeData, "desc");
+    sortData(classData, "desc");
+    sortData(productData, "desc");
     }
     setFilteredRecipeData(recipeData);
     setFilteredClassData(classData);
     setFilteredProductData(productData);
     // 切換排序方向
-    setSortAsc(!sortAsc);
+    setSortDesc(!sortDesc);
   };
   // 偵測搜尋框的輸入
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
   // 用搜尋關鍵字搜尋（食譜名稱、課程名稱、商品名稱）
-  const resultR = recipeData.filter(
-    (item) =>
-      item.title__r_name.includes(searchTerm)
+  const resultR = recipeData.filter((item) =>
+    item.title__r_name.includes(searchTerm)
   );
   const resultC = classData.filter((item) =>
     item.class_name.includes(searchTerm)
@@ -89,7 +87,6 @@ export default function Favor() {
     setFilteredClassData(resultC);
     setFilteredProductData(resultP);
   }, [recipeData, classData, productData]);
-
 
   return (
     <>
@@ -127,7 +124,7 @@ export default function Favor() {
             </div>
             {/* 排序 */}
             <button type="button" className={styles.sort} onClick={sortByTime}>
-              {sortAsc ? (
+              {sortDesc ? (
                 <>
                   <i className="fa-solid fa-arrow-up-wide-short"></i> 由舊到新
                 </>
@@ -139,7 +136,7 @@ export default function Favor() {
             </button>
           </div>
 
-          {/* 把 activeTab 和 setActiveTab 和搜尋結果資料傳遞到FavorTabs 使用 */}
+          {/* 把 activeTab 和 setActiveTab 和搜尋結果資料傳遞到 FavorTabs 使用 */}
           <FavorTabs
             activeTab={activeTab}
             setActiveTab={setActiveTab}
@@ -147,14 +144,11 @@ export default function Favor() {
             filteredClassData={filteredClassData}
             filteredProductData={filteredProductData}
           />
-
-          {/* card-recipe */}
           {activeTab === "食譜" && (
             <div className={styles.cards}>
               <RecipeCardsList recipesData={filteredRecipeData} />
             </div>
           )}
-          {/* card-lecture */}
           {activeTab === "課程" && (
             <div className={styles.cards}>
               <div className={styles.classCard}>
@@ -178,7 +172,6 @@ export default function Favor() {
               </div>
             </div>
           )}
-          {/* card-product */}
           {activeTab === "商品" && (
             <>
               <div className={`${styles.productCard1}`}>

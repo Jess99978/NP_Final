@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useFavor } from "@/hooks/use-favorData";
 import { addClassFav, removeClassFav } from "@/services/user";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import styles from "./FavorIconClass.module.css";
 
@@ -23,15 +23,16 @@ const Heart = ({ size = 24, color = "#db1212" }) => (
 );
 // 接收 ClassCardWeb 卡片中傳來的課程 id 值
 export default function FavIconClass({ id }) {
-  // 從 useAuth 這個 context 取得目前收藏的課程 id 陣列（favorClass）、登入狀態(auth)和對於按鈕被觸發的設置(setAction)
-  const {auth} = useAuth();
+  // 從 useAuth 這個 context 取得登入狀態(auth)
+  const { auth } = useAuth();
+  // 從 useFavor 這個 context 取得目前收藏的課程 id 陣列（favorClass）和對於按鈕被觸發的設置(setAction)
   const { favorClass, setAction } = useFavor();
   const handleAddFav = async (cid) => {
     const res = await addClassFav(cid);
     if (res.data.status === "success") {
       setAction(Date.now());
       toast.success(`已將課程加入收藏!`, {
-        style: { boxShadow:"0px 0px 2px #ccc"}
+        style: { boxShadow: "0px 0px 2px #ccc" },
       });
     }
   };
@@ -43,7 +44,7 @@ export default function FavIconClass({ id }) {
       // 伺服器成功後，更新 action 的值，觸發 context 重新發送 GET 請求並重新設定狀態
       setAction(Date.now());
       toast.success(`已將課程移除收藏!`, {
-        style: { boxShadow:"0px 0px 2px #ccc"}
+        style: { boxShadow: "0px 0px 2px #ccc" },
       });
     }
   };

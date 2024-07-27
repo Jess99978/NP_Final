@@ -21,7 +21,8 @@ const Heart = ({ size = 30, color = "#db1212" }) => (
 );
 // 從卡片組件中傳入該食譜 id
 export default function FavIconRecipe({ id }) {
-  // 從 useAuth 這個 context 取得目前收藏的食譜 id 陣列（favorRecipe）、登入狀態(auth)和對於按鈕被觸發的設置(setAction)
+  // 從 useAuth 這個 context 取得登入狀態(auth)
+  // 從 useFavor 這個 context取得目前收藏的食譜 id 陣列（favorRecipe）和對於按鈕被觸發的設置(setAction)
   const { auth } = useAuth();
   const { favorRecipe, setAction } = useFavor();
 
