@@ -8,6 +8,7 @@
     padding: 60px 0px;
     justify-content: space-between;
     align-items: flex-start;
+    padding-inline: 25px;
     @media (max-width: 375px) {
       width: 375px;
       padding: 0px 20px;
@@ -150,6 +151,7 @@
     gap: 50px;
     align-self: stretch;
     padding-bottom: 50px;
+    overflow: auto;
     @media (max-width: 375px) {
       gap: 15px;
     }

@@ -52,7 +52,7 @@ export default function Index() {
       </div>
 
       <HeroSlider />
-      <div className={`  ${styles.nutripollP}`}>
+      <div className={`${styles.nutripollP} ${styles.wrapper}`}>
         <div className={`${styles.titleP}`}>
           <h1 className={`${styles.titleNutripoll}`}>營養大選 Nutripolls</h1>
           <h6>精挑細選 賣自己想吃的好食物</h6>
