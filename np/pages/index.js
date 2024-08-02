@@ -5,7 +5,7 @@ import { useState, useEffect} from "react";
 import styles from "@/styles/index.module.css";
 import HeaderComponent from "@/components/Header";
 import HeaderSetting from "@/styles/headerSetting.module.scss";
-import HeroSlider from "@/components/index/HeroSlider";
+import HeroSlider from "@/components/index/HeroSlider"
 import Card2 from "@/components/index/Card2";
 import Card3Categories from "@/components/index/Card3Categories";
 import Card4Hot from "@/components/index/Card4Hot";
@@ -52,7 +52,7 @@ export default function Index() {
       </div>
 
       <HeroSlider />
-      <div className={` ${styles.wrapper} ${styles.nutripollP}`}>
+      <div className={`  ${styles.nutripollP}`}>
         <div className={`${styles.titleP}`}>
           <h1 className={`${styles.titleNutripoll}`}>營養大選 Nutripolls</h1>
           <h6>精挑細選 賣自己想吃的好食物</h6>

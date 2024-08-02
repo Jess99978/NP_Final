@@ -3,6 +3,7 @@ import styles from "./HeroSlider.module.css";
 import { useSwipeable } from "react-swipeable";
 
 const HeroSlider = () => {
+  // 預設顯示第一張照片
   const [slideIndex, setSlideIndex] = useState(0);
   const sliders = ["1.png", "2.png", "3.png", "4.png", "6.png"];
   const slideCount = sliders.length;
