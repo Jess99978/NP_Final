@@ -14,26 +14,28 @@
 
 ---
 
-##### 欲測試本專案，請依照以下步驟部署環境
+##### 欲在本機啟動本專案，請依照以下步驟（套件或 .env 已就緒時，可略過對應步驟）
 
-##### 1. 請在[後端資料夾](/np_express/)創立後端.env檔，並將[後端設定文件](/np_express/env.txt)中的內容複製貼上到以創建好的.env檔
-
-##### 2. 請在終端機開啟[後端資料夾](/np_express/)，並輸入
-
-        1.  npm run seed  //建置資料庫數據
-        2.  npm i         //安裝所需套件
-        3.  npm run dev   //運行後端
-
-##### 2.5. 因本專案資料庫建構於Xampp中，因此需開啟Xampp Control Panel，並運行Apache及MySQL
+##### 1. 啟動資料庫：本專案資料庫建構於 Xampp，請先開啟 Xampp Control Panel，並運行 Apache 及 MySQL
 
 ## ![Xampp](/forMarkdownImg/xampp.png "Xampp")
 
-##### 3. 請在終端機開啟[前端資料夾](/np/)，並輸入
+##### 2. 設定後端環境變數：請在[後端資料夾](/np_express/)創立 .env 檔，並將[後端設定文件](/np_express/env.txt)中的內容複製貼上到該檔
 
-        1.  npm i         //安裝所需套件
+##### 3. 啟動後端（http://localhost:3005）：請在終端機開啟[後端資料夾](/np_express/)，依序輸入
+
+        1.  npm i         //安裝所需套件（已安裝過可略）
+        2.  npm run seed  //建置資料庫數據（首次或資料庫為空時才需要）
+        3.  npm run dev   //運行後端
+
+##### 4. 啟動前端（http://localhost:3000）：請另開終端機並開啟[前端資料夾](/np/)，依序輸入
+
+        1.  npm i         //安裝所需套件（已安裝過可略）
         2.  npm run dev   //運行前端
 
-##### 4.請在瀏覽器輸入 [http://localhost:3000/](http://localhost:3000/)，進入網站。
+##### 5. 請在瀏覽器輸入 [http://localhost:3000/](http://localhost:3000/)，進入網站。
+
+##### ※ 補充：登入／登出功能需另行啟動 Redis（localhost:6379）；若未啟動，商品、課程、食譜、首頁等瀏覽功能仍可正常使用。
 
 ##
 
